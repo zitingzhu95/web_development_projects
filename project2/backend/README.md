@@ -95,7 +95,11 @@ The API will return five error types when requests fail:
 - General:
   - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
   - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
-- Sample: curl http://127.0.0.1:5000/questions?page=1
+- Sample: 
+```
+curl http://127.0.0.1:5000/questions?page=1
+```
+will return
 ```
 {
   "categories": [
@@ -139,8 +143,10 @@ The API will return five error types when requests fail:
 ```
 - Error
   - If you try fetch a page which does not have any questions, you will encounter an error which looks like this: 
+```
 curl -X GET http://127.0.0.1:5000/questions?page=12452512
-  - will return
+```
+will return
 ```
 {
   "error": 404,
@@ -149,12 +155,138 @@ curl -X GET http://127.0.0.1:5000/questions?page=12452512
 }
 ```
 
-
-GET /questions
+3. Delete /questions/<question_id>
 - General:
-  - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
-  - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
-- Sample: curl http://127.0.0.1:5000/questions
+  - Deletes specific question based on given id
+- Sample: 
+```
+curl -X DELETE http://127.0.0.1:5000/questions/10
+```
+will return
+```
+{
+  "deleted": 10,
+  "success": true
+}
 ```
 
+4. Post /questions
+- General:
+  - Deletes specific question based on given id
+- Sample: 
+```
+curl -X POST http://127.0.0.1:5000/questions -H "Content-Type: application/json" -d '{"question": "add_question", "answer": "add", "difficulty": 1, "category": 1}'  
+```
+will return
+```
+{
+  "success_insert": true
+}
+```
 
+5. Post /search_questions
+- General:
+  - Return any questions for whom the search term is a substring of the question.
+- Sample: 
+```
+curl -X POST http://127.0.0.1:5000/search_questions -H "Content-Type: application/json" -d '{"searchTerm": "who"}'  
+```
+will return
+```
+{
+  "current_category": null, 
+  "questions": [
+    {
+      "answer": "Maya Angelou", 
+      "category": 4, 
+      "difficulty": 2, 
+      "id": 5, 
+      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
+    }, 
+    {
+      "answer": "George Washington Carver", 
+      "category": 4, 
+      "difficulty": 2, 
+      "id": 12, 
+      "question": "Who invented Peanut Butter?"
+    }, 
+    {
+      "answer": "Alexander Fleming", 
+      "category": 1, 
+      "difficulty": 3, 
+      "id": 21, 
+      "question": "Who discovered penicillin?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 3
+}
+```
+
+6. GET /categories/<int:category_id>/questions
+- General:
+  - Return a list of questions based on category.
+- Sample: 
+```
+curl -X GET http://127.0.0.1:5000/categories/2/questions 
+```
+will return
+```
+{
+  "current_category": 2, 
+  "questions": [
+    {
+      "answer": "Escher", 
+      "category": 2, 
+      "difficulty": 1, 
+      "id": 16, 
+      "question": "Which Dutch graphic artist\u2013initials M C was a creator of optical illusions?"
+    }, 
+    {
+      "answer": "Mona Lisa", 
+      "category": 2, 
+      "difficulty": 3, 
+      "id": 17, 
+      "question": "La Giaconda is better known as what?"
+    }, 
+    {
+      "answer": "One", 
+      "category": 2, 
+      "difficulty": 4, 
+      "id": 18, 
+      "question": "How many paintings did Van Gogh sell in his lifetime?"
+    }, 
+    {
+      "answer": "Jackson Pollock", 
+      "category": 2, 
+      "difficulty": 2, 
+      "id": 19, 
+      "question": "Which American artist was a pioneer of Abstract Expressionism, and a leading exponent of action painting?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 4
+}
+```
+
+7. POST /quizzes
+- General:
+  - Get questions to play the quiz
+  - take category and previous question parameters and return a random questions within the given category,
+- Sample: 
+```
+curl -X POST http://127.0.0.1:5000/quizzes -H "Content-Type: application/json" -d '{"previous_questions": [], "quiz_category" : {"type" : "Science", "id" : "1"}}'
+```
+will return
+```
+{
+  "question": {
+    "answer": "add", 
+    "category": 1, 
+    "difficulty": 1, 
+    "id": 39, 
+    "question": "add_question"
+  }, 
+  "success": true
+}
+```
