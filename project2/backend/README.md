@@ -120,9 +120,16 @@ Errors are returned as JSON objects in the following format:
 ```
 
 The API will return five error types when requests fail:
-400:Null or invalid syntax in request.
-404:
-405:
-422:
-500:
+- 400: Null or invalid syntax in request
+- 404: Requested page not found
+- 405: Method not allowed
+- 422: Cannot process request
+- 500: Internal server error
+
+### Endpoints
+GET /books
+- General:
+-- Returns a list of book objects, success value, and total number of books
+-- Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
+- Sample: curl http://127.0.0.1:5000/books
 
