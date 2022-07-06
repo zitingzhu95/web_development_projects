@@ -129,7 +129,7 @@ The API will return five error types when requests fail:
 ### Endpoints
 GET /books
 - General:
- - Returns a list of book objects, success value, and total number of books
- - Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
+  - Returns a list of book objects, success value, and total number of books
+  - Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
 - Sample: curl http://127.0.0.1:5000/books
 
