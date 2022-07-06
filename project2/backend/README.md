@@ -127,9 +127,87 @@ The API will return five error types when requests fail:
 - 500: Internal server error
 
 ### Endpoints
-GET /books
+1. GET /categories
 - General:
-  - Returns a list of book objects, success value, and total number of books
-  - Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
-- Sample: curl http://127.0.0.1:5000/books
+  - Returns a list of Category objects, success value
+- Sample: curl http://127.0.0.1:5000/categories
+```
+{
+  "categories": [
+    "Science", 
+    "Art", 
+    "Geography", 
+    "History", 
+    "Entertainment", 
+    "Sports"
+  ], 
+  "success": true
+}
+```
+2. GET /questions
+- General:
+  - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
+  - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
+- Sample: curl http://127.0.0.1:5000/questions?page=1
+```
+{
+  "categories": [
+    "Science", 
+    "Art", 
+    "Geography", 
+    "History", 
+    "Entertainment", 
+    "Sports"
+  ], 
+  "currentCategory": [
+    "Science", 
+    "Art", 
+    "Geography", 
+    "History", 
+    "Entertainment", 
+    "Sports"
+  ], 
+  "questions": [
+    {
+      "answer": "Apollo 13", 
+      "category": 5, 
+      "difficulty": 4, 
+      "id": 2, 
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    }, 
+    {
+      "answer": "Tom Cruise", 
+      "category": 5, 
+      "difficulty": 4, 
+      "id": 4, 
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    }, 
+    
+ [...]
+ 
+  ], 
+  "success": true, 
+  "totalQuestions": 23
+}
+```
+- Error
+  - If you try fetch a page which does not have any questions, you will encounter an error which looks like this: 
+curl -X GET http://127.0.0.1:5000/questions?page=12452512
+  - will return
+```
+{
+  "error": 404,
+  "message": "resource not found",
+  "success": false
+}
+```
+
+
+GET /questions
+- General:
+  - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
+  - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
+- Sample: curl http://127.0.0.1:5000/questions
+```
+
 
