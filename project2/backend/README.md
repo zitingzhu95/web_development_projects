@@ -115,6 +115,14 @@ Errors are returned as JSON objects in the following format:
 {
     "success": False, 
     "error": 400,
-    "message": "bad request"
+    "message": "Null or invalid syntax in request."
 }
 ```
+
+The API will return five error types when requests fail:
+400:Null or invalid syntax in request.
+404:
+405:
+422:
+500:
+
