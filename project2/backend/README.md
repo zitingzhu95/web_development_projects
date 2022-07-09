@@ -125,8 +125,8 @@ The API will return five error types when requests fail:
 - 422: Cannot process request
 - 500: Internal server error
 
-### Endpoints
-1. GET /categories
+## Endpoints
+### 1. GET /categories
 - General:
   - Returns a list of Category objects, success value
 - Sample: curl http://127.0.0.1:5000/categories
@@ -144,7 +144,7 @@ The API will return five error types when requests fail:
 }
 ```
 
-2. GET /questions
+### 2. GET /questions
 - General:
   - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
   - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
@@ -209,7 +209,7 @@ will return
 }
 ```
 
-3. Delete /questions/<question_id>
+### 3. Delete /questions/<question_id>
 - General:
   - Deletes specific question based on given id
 - Sample: 
@@ -224,7 +224,7 @@ will return
 }
 ```
 
-4. Post /questions
+### 4. Post /questions
 - General:
   - Deletes specific question based on given id
 - Sample: 
@@ -259,7 +259,7 @@ will return
 }
 ```
 
-5. Post /search_questions
+### 5. Post /search_questions
 - General:
   - Return any questions for whom the search term is a substring of the question.
 - Sample: 
@@ -298,7 +298,7 @@ will return
 }
 ```
 
-6. GET /categories/<int:category_id>/questions
+### 6. GET /categories/<int:category_id>/questions
 - General:
   - Return a list of questions based on category.
 - Sample: 
@@ -306,13 +306,6 @@ will return
 curl -X GET http://127.0.0.1:5000/categories/2/questions 
 ```
 will return
-```
-
-```
-### GET /categories/int:category_id/questions
-- General:
-  - Return a list of questions based on category.
-- Sample:
 ```json
 {
   "current_category": 2, 
@@ -351,7 +344,7 @@ will return
 }
 ```
 
-7. POST /quizzes
+### 7. POST /quizzes
 - General:
   - Get questions to play the quiz
   - take category and previous question parameters and return a random questions within the given category,
