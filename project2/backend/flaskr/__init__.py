@@ -84,9 +84,6 @@ def create_app(test_config=None):
     def get_categories():
         # Get all categories
         categories = db.session.query(Category).all()
-        # If no categories could be found, throw 404
-        if not categories:
-            abort(404)
         formated_categories = [category.type for category in categories]
         return jsonify({
                 'success': True,
@@ -110,7 +107,7 @@ def create_app(test_config=None):
         questions = db.session.query(Question).order_by(Question.id).all()
         formated_questions = [question.format() for question in questions]
         if len(formated_questions) == 0 or start > len(formated_questions):
-            abort(404)
+            abort(404, {'message': 'No questions in selected page.'})
         categories = db.session.query(Category).all()
         formated_categories = [category.type for category in categories]
         curent_categories = [category.type for category in categories]
@@ -122,20 +119,12 @@ def create_app(test_config=None):
                 'categories': formated_categories
             })
 
-    # @app.route('/questions/<int:question_id>', methods = ["GET"])
-    # def get_question(question_id):
-    #     question = db.session.query(Question)\
-    #                   .filter(Question.id ==question_id)\
-    #                   .one_or_none()
-    #     formated_question = question.format()
-    #     return jsonify({
-    #             'success_get_question': True,
-    #             'questions': formated_question
-    #         })
+    #  ----------------------------------------------------------------  #
+    #  3. Create an endpoint to DELETE question using a question ID.
+    #  ----------------------------------------------------------------  #
     """
-    3. Create an endpoint to DELETE question using a question ID.
-    TEST:When you click the trash icon next to a question,
-    the question will be removed.
+    This endpoint should remove a questions
+    when you click the trash icon next to a question.
     This removal will persist in the database and when you refresh the page.
     """
     @app.route('/questions/<int:question_id>', methods=["DELETE"])
@@ -332,6 +321,7 @@ def create_app(test_config=None):
         questions_formatted = [
             question.format() for question in questions_to_select]
         number_of_questions = len(questions)
+        number_of_questions_to_select = len(questions_to_select)
         if len(previous_questions) == number_of_questions:
             return jsonify({
                 'message': 'All the questions have been tested!',
@@ -339,7 +329,7 @@ def create_app(test_config=None):
             })
 
         random_question = questions_formatted[
-            random.randint(0, number_of_questions - 1)]
+            random.randint(0, number_of_questions_to_select-1)]
 
         return jsonify({
                 'success': True,

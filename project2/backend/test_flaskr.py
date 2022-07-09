@@ -101,7 +101,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['error'], 404)
-        self.assertEqual(data['message'], "Requested page not found.")
+        self.assertEqual(data['message'], "No questions in selected page.")
         self.assertEqual(data['success'], False)
 
     #  -----------------------------------------------------------------  #

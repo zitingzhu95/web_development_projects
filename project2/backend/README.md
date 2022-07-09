@@ -44,28 +44,7 @@ To run the server, execute:
 
 ```bash
 flask run --reload
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
-
-The `--reload` flag will detect file changes and restart the server automatically.
-
-
-## API Documentation
-
-### Getting Started
-
-Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, http://127.0.0.1:5000/, which is set as a proxy in the frontend configuration.
-Authentication: This version of the application does not require authentication or API keys.
-
-### Error Handling
-Errors are returned as JSON objects in the following format:
-```json
-=======
-The --reload flag will detect file changes and restart the server automatically.
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
 
 The `--reload` flag will detect file changes and restart the server automatically.
 
@@ -117,9 +96,6 @@ Write at least one test for the success and at least one error behavior of each 
 
 To deploy the tests, run
 
-<<<<<<< HEAD
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
 ```bash
 dropdb trivia_test
 createdb trivia_test
@@ -135,14 +111,11 @@ python test_flaskr.py
 ## Error Handling
 Errors are returned as JSON objects in the following format:
 ```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
 {
     "success": False, 
     "error": 400,
     "message": "Null or invalid syntax in request."
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
 
 The API will return five error types when requests fail:
@@ -157,7 +130,7 @@ The API will return five error types when requests fail:
 - General:
   - Returns a list of Category objects, success value
 - Sample: curl http://127.0.0.1:5000/categories
-```
+```json
 {
   "categories": [
     "Science", 
@@ -170,6 +143,7 @@ The API will return five error types when requests fail:
   "success": true
 }
 ```
+
 2. GET /questions
 - General:
   - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
@@ -179,7 +153,7 @@ The API will return five error types when requests fail:
 curl http://127.0.0.1:5000/questions?page=1
 ```
 will return
-```
+```json
 {
   "categories": [
     "Science", 
@@ -220,116 +194,19 @@ will return
   "totalQuestions": 23
 }
 ```
+
 - Error
   - If you try fetch a page which does not have any questions, you will encounter an error which looks like this: 
 ```
-curl -X GET http://127.0.0.1:5000/questions?page=12452512
+curl -X GET http://127.0.0.1:5000/questions?page=123456
 ```
 will return
-```
-=======
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
-The API will return five error types when requests fail:
-- 400: Null or invalid syntax in request
-- 404: Requested page not found
-- 405: Method not allowed
-- 422: Cannot process request
-- 500: Internal server error
-
-## Endpoints
-### GET /categories
-- General:
-  - Returns a list of Category objects, success value
-- Sample: 
-```
-curl http://127.0.0.1:5000/categories
-```
-will return
-```
+```json
 {
-  "categories": [
-    "Science", 
-    "Art", 
-    "Geography", 
-    "History", 
-    "Entertainment", 
-    "Sports"
-  ], 
-  "success": true
-}
-```
-
-### GET /questions
-- General: 
-  - Returns a list of Question objects, total question numbers, current category, a list of categories, success value
-  - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
-- Sample: 
-```
-curl http://127.0.0.1:5000/questions?page=1
-```
-will return
-```
-{
-  "categories": [
-    "Science", 
-    "Art", 
-    "Geography", 
-    "History", 
-    "Entertainment", 
-    "Sports"
-  ], 
-  "currentCategory": [
-    "Science", 
-    "Art", 
-    "Geography", 
-    "History", 
-    "Entertainment", 
-    "Sports"
-  ], 
-  "questions": [
-    {
-      "answer": "Apollo 13", 
-      "category": 5, 
-      "difficulty": 4, 
-      "id": 2, 
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    }, 
-    {
-      "answer": "Tom Cruise", 
-      "category": 5, 
-      "difficulty": 4, 
-      "id": 4, 
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-    }, 
-    
- [...]
- 
-  ], 
-  "success": true, 
-  "totalQuestions": 23
-}
-```
-- Error
-If you try fetch a page which does not have any questions, you will encounter an error which looks like this:
-```
-curl -X GET http://127.0.0.1:5000/questions?page=12452512
-```
-will return
-<<<<<<< HEAD
-
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
-{
-  "error": 404,
-  "message": "resource not found",
+  "error": 404, 
+  "message": "No questions in selected page.", 
   "success": false
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
 
 3. Delete /questions/<question_id>
@@ -340,46 +217,13 @@ will return
 curl -X DELETE http://127.0.0.1:5000/questions/10
 ```
 will return
-```
-=======
-Delete /questions/<question_id>
-General:
-Deletes specific question based on given id
-Sample:
-=======
-```
-### Delete /questions/<question_id>
-- General:
-  - Deletes specific question based on given id
-- Sample:
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
-curl -X DELETE http://127.0.0.1:5000/questions/10
-```
-will return
-<<<<<<< HEAD
-
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
+```json
 {
-  "deleted": 10,
-  "success": true
+  "deleted": 10, 
+  "success_delete": true
 }
 ```
 
-### Post /questions
-- General:
-  - Deletes specific question based on given id
-- Sample:
-```
-curl -X POST http://127.0.0.1:5000/questions -H "Content-Type: application/json" -d '{"question": "add_question", "answer": "add", "difficulty": 1, "category": 1}'  
-```
-will return
-<<<<<<< HEAD
-
-<<<<<<< HEAD
 4. Post /questions
 - General:
   - Deletes specific question based on given id
@@ -388,9 +232,30 @@ will return
 curl -X POST http://127.0.0.1:5000/questions -H "Content-Type: application/json" -d '{"question": "add_question", "answer": "add", "difficulty": 1, "category": 1}'  
 ```
 will return
-```
+```json
 {
-  "success_insert": true
+  "question_id": 24, 
+  "questions": [
+    {
+      "answer": "Apollo 13", 
+      "category": 5, 
+      "difficulty": 4, 
+      "id": 2, 
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    }, 
+    {
+      "answer": "Tom Cruise", 
+      "category": 5, 
+      "difficulty": 4, 
+      "id": 4, 
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    }, 
+  
+  [...]
+  
+  ], 
+  "success_insert": true, 
+  "total_questions": 19
 }
 ```
 
@@ -402,30 +267,7 @@ will return
 curl -X POST http://127.0.0.1:5000/search_questions -H "Content-Type: application/json" -d '{"searchTerm": "who"}'  
 ```
 will return
-```
-=======
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
-{
-  "success_insert": true
-}
-```
-
-### Post /search_questions
-- General:
-  -Return any questions for whom the search term is a substring of the question.
-- Sample:
-```
-curl -X POST http://127.0.0.1:5000/search_questions -H "Content-Type: application/json" -d '{"searchTerm": "who"}'  
-```
-will return
-<<<<<<< HEAD
-
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
+```json
 {
   "current_category": null, 
   "questions": [
@@ -454,8 +296,6 @@ will return
   "success": true, 
   "total_questions": 3
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
 
 6. GET /categories/<int:category_id>/questions
@@ -467,28 +307,13 @@ curl -X GET http://127.0.0.1:5000/categories/2/questions
 ```
 will return
 ```
-=======
-GET /categories/int:category_id/questions
-General:
-Return a list of questions based on category.
-Sample:
-=======
+
 ```
 ### GET /categories/int:category_id/questions
 - General:
   - Return a list of questions based on category.
 - Sample:
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
-curl -X GET http://127.0.0.1:5000/categories/2/questions 
-```
-will return
-<<<<<<< HEAD
-
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
+```json
 {
   "current_category": 2, 
   "questions": [
@@ -524,8 +349,6 @@ will return
   "success": true, 
   "total_questions": 4
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
 
 7. POST /quizzes
@@ -534,50 +357,18 @@ will return
   - take category and previous question parameters and return a random questions within the given category,
 - Sample: 
 ```
-curl -X POST http://127.0.0.1:5000/quizzes -H "Content-Type: application/json" -d '{"previous_questions": [], "quiz_category" : {"type" : "Science", "id" : "1"}}'
+curl -X POST http://127.0.0.1:5000/quizzes -H "Content-Type: application/json" -d '{"previous_questions": [13, 14 ], "quiz_category" : {"type" : "Geography", "id" : "3"}}'
 ```
 will return
-```
-=======
-POST /quizzes
-General:
-Get questions to play the quiz
-take category and previous question parameters and return a random questions within the given category,
-Sample:
-=======
-```
-
-### POST /quizzes
-- General:
-  - Get questions to play the quiz
-  - Take category and previous question parameters and return a random questions within the given category,
-- Sample:
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
-curl -X POST http://127.0.0.1:5000/quizzes -H "Content-Type: application/json" -d '{"previous_questions": [], "quiz_category" : {"type" : "Science", "id" : "1"}}'
-```
-will return
-<<<<<<< HEAD
-
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
+```json
 {
   "question": {
-    "answer": "add", 
-    "category": 1, 
-    "difficulty": 1, 
-    "id": 39, 
-    "question": "add_question"
+    "answer": "Agra", 
+    "category": 3, 
+    "difficulty": 2, 
+    "id": 15, 
+    "question": "The Taj Mahal is located in which Indian city?"
   }, 
   "success": true
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
-=======
->>>>>>> 1a79f1eed4ae7e9903df8076ae4d9de5047560cd
-=======
-```
->>>>>>> 9c13f33e9b029dabc21aca7cfc8eca4d8718b6f5
