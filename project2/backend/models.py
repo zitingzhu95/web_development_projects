@@ -24,6 +24,7 @@ Question
 
 """
 class Question(db.Model):
+    
     __tablename__ = 'questions'
 
     id = Column(Integer, primary_key=True)
@@ -63,6 +64,7 @@ Category
 
 """
 class Category(db.Model):
+
     __tablename__ = 'categories'
 
     id = Column(Integer, primary_key=True)
