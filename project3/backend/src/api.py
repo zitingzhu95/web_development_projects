@@ -4,20 +4,35 @@ from sqlalchemy import exc
 import json
 from flask_cors import CORS
 
-from .database.models import db_drop_and_create_all, setup_db, Drink
-from .auth.auth import AuthError, requires_auth
+from database.models import db_drop_and_create_all, setup_db, Drink
+from auth.auth import AuthError, requires_auth
 
 app = Flask(__name__)
 setup_db(app)
 CORS(app)
+#db_drop_and_create_all()
 
-'''
-@TODO uncomment the following line to initialize the datbase
-!! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
-!! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
-!! Running this funciton will add one
-'''
-db_drop_and_create_all()
+#  ----------------------------------------------------------------  #
+#  0. Define costomized function
+#  ----------------------------------------------------------------  #
+def getErrorMessage(error, default_text):
+    '''
+    Returns default error text or custom error message
+    Parameters:
+    - <error> system generated error message
+    which contains a description message
+    - <string> default text to be used as error message
+    if Error has no specific message
+    Returns:
+    - <string> specific error message or default text
+    (if no specific message is given)
+    '''
+    try:
+        # Return message contained in error
+        return error.description["message"]
+    except TypeError:
+        # otherwise, return given default text
+        return default_text
 
 # ROUTES
 '''
@@ -76,37 +91,51 @@ db_drop_and_create_all()
 '''
 
 
-# Error Handling
-'''
-Example error handling for unprocessable entity
-'''
+#----------------------------------------------------------------------------#
+# API error handler & formatter.
+#----------------------------------------------------------------------------#
+ 
+# reate error handlers for all expected errors 
 
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "success": False, 
+        "error": 400,
+        "message": getErrorMessage(error, "bad request")
+        }), 400
+
+@app.errorhandler(404)
+def ressource_not_found(error):
+    return jsonify({
+        "success": False, 
+        "error": 404,
+        "message": getErrorMessage(error, "resource not found")
+        }), 404
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+    return jsonify({
+        "success": False, 
+        "error": 405,
+        "message": "method not allowed"
+        }), 405
 
 @app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
-        "success": False,
+        "success": False, 
         "error": 422,
-        "message": "unprocessable"
-    }), 422
+        "message": getErrorMessage(error, "unprocessable")
+        }), 422
 
-
-'''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
-    each error handler should return (with approprate messages):
-             jsonify({
-                    "success": False,
-                    "error": 404,
-                    "message": "resource not found"
-                    }), 404
-
-'''
-
-'''
-@TODO implement error handler for 404
-    error handler should conform to general task above
-'''
-
+@app.errorhandler(500)
+def internal_server_error(error):
+    return jsonify({
+        "success": False, 
+        "error": 500,
+        "message": "internal server error"
+        }), 500
 
 '''
 @TODO implement error handler for AuthError
