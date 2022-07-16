@@ -108,10 +108,16 @@ def create_drink(payload):
     """Creates new drink and returns it to client"""
     
     body = request.get_json()
-    new_drink = Drink(title = body['title'], recipe = """{}""".format(body['recipe']))
-    
+    print("######################")
+    print(body)
+    print("######################")
+    print("{}".format(body['recipe']))
+    new_drink = Drink(
+        title = "{}".format(body['title']),
+        recipe = """{}""".format(json.dumps(body['recipe'])))
+ 
     new_drink.insert()
-    new_drink.recipe = body['recipe']
+    # new_drink.recipe = body['recipe']
     return jsonify({
     'success': True,
     'drinks': Drink.long(new_drink)
