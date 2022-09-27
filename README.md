@@ -1,1 +1,1 @@
-# udacity_webdev_class
+# udacity_webdev_projects
